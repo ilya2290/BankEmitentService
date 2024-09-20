@@ -6,21 +6,25 @@
 
 package com.example.BankEmitentService.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 /**
  * Data Transfer Object for Bank Emitment.
  * This class is used to transfer data between the server and client.
  */
+@Builder
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class BankEmitmentDTO {
+
     private int bin;
+
     private String alphaCode;
+
     private String bankName;
 }
+
+
+

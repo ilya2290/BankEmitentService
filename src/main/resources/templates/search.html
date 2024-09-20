@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        input, button {
+            padding: 10px;
+        }
+        button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            display: none;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+    </style>
+</head>
+
+<body>
+
+<h1>Bank Card Searching</h1>
+
+<form id="cardForm">
+    <label for="cardNumber">Enter card number:</label>
+    <input type="text" id="cardNumber" placeholder="Card number" required />
+    <button type="submit">Search</button>
+</form>
+
+<div id="result" aria-live="polite"></div>
+
+<table id="cardDataTable">
+    <thead>
+    <tr>
+        <th>BIN</th>
+        <th>Alpha Code</th>
+        <th>Bank Name</th>
+    </tr>
+    </thead>
+    <tbody id="cardDataBody"></tbody>
+</table>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('cardForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            const cardNumber = document.getElementById('cardNumber').value;
+            const resultDiv = document.getElementById('result');
+            const cardDataTable = document.getElementById('cardDataTable');
+            const cardDataBody = document.getElementById('cardDataBody');
+
+            resultDiv.style.display = 'none';
+            cardDataBody.innerHTML = '';
+
+            try {
+                const response = await fetch(`http://localhost:8089/api/v1/card?cardNumber=${encodeURIComponent(cardNumber)}`, {
+                    method: 'POST',
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    resultDiv.style.display = 'block';
+                    cardDataBody.innerHTML = `
+                        <tr>
+                            <td>${data.bin}</td>
+                            <td>${data.alphaCode}</td>
+                            <td>${data.bankName}</td>
+                        </tr>
+                    `;
+                    cardDataTable.style.display = 'table';
+                } else {
+                    resultDiv.style.display = 'block';
+                    resultDiv.textContent = 'Card not found.';
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                resultDiv.style.display = 'block';
+                resultDiv.textContent = 'An error occurred while checking the card.';
+            }
+        });
+    });
+</script>
+</body>
+</html>

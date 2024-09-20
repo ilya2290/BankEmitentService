@@ -6,7 +6,6 @@
 
 package com.example.BankEmitentService.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.gson.annotations.SerializedName;
 import jakarta.persistence.*;
 import lombok.*;
@@ -25,7 +24,6 @@ public class BankEmitment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonIgnore
     int id;
 
     @Column
@@ -33,12 +31,10 @@ public class BankEmitment {
 
     @Column(name = "min_range")
     @SerializedName("min_range")
-    @JsonIgnore
     String minRange;
 
     @Column(name = "max_range")
     @SerializedName("max_range")
-    @JsonIgnore
     String maxRange;
 
     @Column(name = "alpha_code")

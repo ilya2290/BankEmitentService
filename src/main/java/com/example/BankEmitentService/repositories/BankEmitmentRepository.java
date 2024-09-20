@@ -14,7 +14,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
-
 /**
  * Repository interface for managing BankEmitment entities. This interface
  * extends JpaRepository to provide basic CRUD operations on the BankEmitment
@@ -22,7 +21,6 @@ import java.util.List;
  */
 @Repository
 public interface BankEmitmentRepository extends JpaRepository<BankEmitment, Integer> {
-
 
     /**
      * Truncates the entire bank_emitments table.
