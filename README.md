@@ -51,6 +51,7 @@ The paths are constructed using system-dependent file separators to ensure compa
 1. Clone the repository or download the files.
 2. Open the `search.html` file in your browser.
 3. Ensure the API server is running at `http://localhost:8089`.
+4. Make sure PostgreSQL is installed and a database is set up according to the application requirements.
 
 ## Usage
 
