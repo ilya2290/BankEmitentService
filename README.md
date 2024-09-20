@@ -16,6 +16,7 @@ This web application allows users to enter a bank card number and retrieve infor
   - JavaScript
 
 - **Backend:**
+  - Java 22
   - Spring Boot
   - PostgreSQL
     
